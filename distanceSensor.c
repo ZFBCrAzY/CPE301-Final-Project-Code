@@ -1,9 +1,9 @@
 #include "distanceSensor.h"
 #define F_CPU 16000000UL
 #include <util/delay.h>
+#include <string.h>
 
 // Function: Sets up Ultrasonic sensor setting
-//
 void ultraSonicInit(){
     //sets Pin Directions Needed For Ultrasonic
     //Sets Trig as output
@@ -12,7 +12,7 @@ void ultraSonicInit(){
     DDRD &= ~(1 << ECHO);
 }
 
-//sets up timer to get echo pulse time
+// Begins to collect ultrasonic pulse data
 unsigned int measureDistance(){
     //holds the time 
     unsigned int time = 0;
@@ -43,26 +43,35 @@ unsigned int measureDistance(){
     //stop timer
     TCCR1B = 0x00;
     count++; 
-    _delay_ms(10);
+    _delay_ms(60);
     }
 
     //gets the average
-    time = time / 5
+    time = time / 5;
 
-    /returns time to be calculated
+    //returns time to be calculated
     return time;
 }
 
+// Function: Gets the Distance using the Ultrasonic Sensor
+// Input: A unit label used to select desired distance unit
+// Output: Distance as a int in the unit selected.
 unsigned int getDistance(const char *str){
-    if(str == "cm"){
-
+    //Initialize Distance/time variables
+    unsigned int distance = 0;
+    unsigned int time = 0;
+    //collects time from ultrasonic pulses
+    time = measureDistance();
+    //Calculates Distance from time based on given unit
+    if(strcmp(str,"cm") == 0){
+        distance = time / 116;
     }
-    else if(str == "inch"){
-    
+    else if(strcmp(str,"inch") == 0){
+        distance = time / 296;
     }
-    else if(str == "feet"){
-        
+    else if(strcmp(str,"feet") == 0){
+        distance = time / 3552;
     }
-
-
+    //returns the distance in the desired unit
+    return distance;
 }
