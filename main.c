@@ -11,9 +11,6 @@
 #include "distanceSensor.h"
 #include "lcdDisplay.h"
 
-//Pin Mapping
- 
- Testing
 
 
 int main(void)
