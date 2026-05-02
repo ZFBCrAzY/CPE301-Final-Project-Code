@@ -5,19 +5,21 @@
  *  Author: CrAzY
  */ 
 
+//updated by Dakota
+
 #include <avr/io.h>
 #include <util/delay.h>
 //header Files for Cleaner Code
 #include "distanceSensor.h"
 #include "lcdDisplay.h"
-
-
+#include "io.h"
 
 int main(void)
 {
+	//initial setup
+	lcd_init();
+	ultraSonicInit();
+	IOInit();
 	
-    while(1)
-    {
-        //TODO:: Please write your application code 
-    }
+    IO(); //runs IO function in an infinite loop (see io.c)
 }
