@@ -22,7 +22,7 @@ void IO(){
 	
 	char buffer[4];
 	char Msg1[] = "Distance: ";
-	char unitUsed[] = "Unit: cm";
+	char unitUsed[] = "cm";
 	
 	//runs in a repeated loop
 	while(1){
@@ -46,7 +46,7 @@ void IO(){
 		lcd_print(buffer);
 		
 		//prints which distance unit is used
-		lcd_gotoxy(1,2);
+		lcd_gotoxy(14,1);
 		lcd_print(unitUsed);
 		
 		//drive PB0 high (turn on buzzer for 300ms)
